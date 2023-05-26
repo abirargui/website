@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConnexionController!{% endblock %}
+
+{% block body %}
+
+<html>
+<head>
+    <title>Page de Connexion</title>
+    <style>
+        /* Styles CSS pour la mise en page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 100px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group .error-message {
+            color: red;
+            font-size: 14px;
+        }
+
+        .form-group .success-message {
+            color: green;
+            font-size: 14px;
+        }
+
+        .form-group .btn {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Connexion</h2>
+        <div id="error-message" class="form-group">
+            <!-- L'emplacement pour afficher les messages d'erreur -->
+        </div>
+         
+        <form id="login-form" action="/login" method="post">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                    <a href="{{ path('index') }}">Se connecter</a>
+
+                 </br>
+                <a class="small text-muted" href="#!">Forgot password?</a>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="/inscription"
+                      style="color: #393f81;">Register here</a></p>
+            </div>
+        </form>
+
+        <script>
+            document.getElementById("login-form").addEventListener("submit", function(event) {
+                event.preventDefault(); // Empêche le formulaire de se soumettre normalement
+
+                // Récupérer les valeurs des champs
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+
+                // Vérifier les informations de connexion
+                if (username === "admin" && password === "password") {
+                    // Connexion réussie, rediriger vers la page d'accueil
+                    window.location.href = "/accueil";
+                } else {
+                    // Afficher un message d'erreur
+                    var errorMessage = document.getElementById("error-message");
+                    errorMessage.innerHTML = "Nom d'utilisateur ou mot de passe incorrect.";
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
+
+{% endblock %}
